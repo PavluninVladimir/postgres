@@ -64,6 +64,7 @@ services:
         PGADMIN_DEFAULT_EMAIL: "habrpguser@habr.com"
         PGADMIN_DEFAULT_PASSWORD: "pgadminpwd4habr"
         PGADMIN_CONFIG_SERVER_MODE: "False"
+        PGADMIN_LISTEN_PORT: 5050
       volumes:
         - pgadmin-data:/var/lib/pgadmin
       restart: unless-stopped
@@ -74,6 +75,7 @@ services:
       #       memory: 1G
       networks:
         - postgres
+        - proxynet
       labels:
       # Frontend
       - "traefik.enable=true"
@@ -90,3 +92,7 @@ volumes:
 networks:
   postgres:
     driver: bridge
+  proxynet:
+    name: proxynet
+    external: true
+      
