@@ -54,6 +54,39 @@ services:
     #     limits:
     #       cpus: '1'
     #       memory: 4G
+    networks:
+        - postgres
+
+  pgadmin:
+      container_name: pgadmin_container
+      image: dpage/pgadmin4:7.2
+      environment:
+        PGADMIN_DEFAULT_EMAIL: "habrpguser@habr.com"
+        PGADMIN_DEFAULT_PASSWORD: "pgadminpwd4habr"
+        PGADMIN_CONFIG_SERVER_MODE: "False"
+      volumes:
+        - pgadmin-data:/var/lib/pgadmin
+      restart: unless-stopped
+      # deploy:
+      #   resources:
+      #     limits:
+      #       cpus: '0.5'
+      #       memory: 1G
+      networks:
+        - postgres
+      labels:
+      # Frontend
+      - "traefik.enable=true"
+      - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.pavlunin.com`)"
+      - "traefik.http.routers.pgadmin.entrypoints=https"
+      - "traefik.http.services.pgadmin.loadbalancer.server.port=5050"
+      - "traefik.http.routers.pgadmin.service=pgadmin"
+      - "traefik.http.routers.pgadmin.tls.certresolver=leresolver"
 
 volumes:
   postgres-data:
+  pgadmin-data:
+
+networks:
+  postgres:
+    driver: bridge
