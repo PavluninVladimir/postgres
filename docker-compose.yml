@@ -33,9 +33,9 @@ services:
       - "-c"
       - "pg_stat_statements.track=all"
     environment:
-      POSTGRES_DB: "habrdb"
-      POSTGRES_USER: "habrpguser"
-      POSTGRES_PASSWORD: "pgpwd4habr1"
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       PGDATA: "/var/lib/postgresql/data/pgdata"
     volumes:
       - ../2. Init Database:/docker-entrypoint-initdb.d
@@ -61,9 +61,9 @@ services:
       container_name: pgadmin_container
       image: dpage/pgadmin4:7.2
       environment:
-        PGADMIN_DEFAULT_EMAIL: "habrpguser@habr.com"
-        PGADMIN_DEFAULT_PASSWORD: "pgadminpwd4habr"
-        PGADMIN_CONFIG_SERVER_MODE: "False"
+        PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
+        PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
+        PGADMIN_CONFIG_SERVER_MODE: "${PGADMIN_CONFIG_SERVER_MODE}"
         PGADMIN_LISTEN_PORT: 5050
       volumes:
         - pgadmin-data:/var/lib/pgadmin
@@ -79,7 +79,7 @@ services:
       labels:
       # Frontend
       - "traefik.enable=true"
-      - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.pavlunin.com`)"
+      - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.${TRAEFIK_HOST}.com`)"
       - "traefik.http.routers.pgadmin.entrypoints=https"
       - "traefik.http.services.pgadmin.loadbalancer.server.port=5050"
       - "traefik.http.routers.pgadmin.service=pgadmin"
