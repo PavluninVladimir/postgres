@@ -61,7 +61,7 @@ services:
 
   pgadmin:
       container_name: pgadmin_container
-      image: dpage/pgadmin4:lates
+      image: dpage/pgadmin4:latest
       env_file:
         - stack.env
       environment:
