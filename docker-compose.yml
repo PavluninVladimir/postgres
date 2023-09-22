@@ -83,7 +83,7 @@ services:
       labels:
       # Frontend
       - "traefik.enable=true"
-      - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.pavlunin.com`)"
+      - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.${TRAEFIK_HOST}`)"
       - "traefik.http.routers.pgadmin.entrypoints=https"
       - "traefik.http.services.pgadmin.loadbalancer.server.port=5050"
       - "traefik.http.routers.pgadmin.service=pgadmin"
