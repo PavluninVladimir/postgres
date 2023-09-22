@@ -87,7 +87,7 @@ services:
       - "traefik.http.routers.pgadmin.entrypoints=https"
       - "traefik.http.services.pgadmin.loadbalancer.server.port=5050"
       - "traefik.http.routers.pgadmin.service=pgadmin"
-      - "traefik.http.routers.pgadmin.tls.certresolver=leresolver"
+      - "traefik.http.routers.pgadmin.tls.certresolver=le"
 
 volumes:
   postgres-data:
