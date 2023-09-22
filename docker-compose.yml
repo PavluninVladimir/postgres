@@ -2,6 +2,8 @@ version: "3.9"
 services:
   postgres:
     image: postgres:14.8-alpine3.18
+    env_file:
+      - stack.env
     command:
       - "postgres"
       - "-c"
@@ -60,6 +62,8 @@ services:
   pgadmin:
       container_name: pgadmin_container
       image: dpage/pgadmin4:7.2
+      env_file:
+        - stack.env
       environment:
         PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
         PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
