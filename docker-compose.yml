@@ -61,13 +61,13 @@ services:
 
   pgadmin:
       container_name: pgadmin_container
-      image: dpage/pgadmin4:7.7
+      image: dpage/pgadmin4:lates
       env_file:
         - stack.env
       environment:
         PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
         PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
-        # PGADMIN_CONFIG_SERVER_MODE: "${PGADMIN_CONFIG_SERVER_MODE}"
+        PGADMIN_CONFIG_SERVER_MODE: "${PGADMIN_CONFIG_SERVER_MODE}"
         PGADMIN_LISTEN_PORT: 5050
       volumes:
         - pgadmin-data:/var/lib/pgadmin
